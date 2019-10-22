@@ -1,8 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import {render} from 'react-dom';
+import RepLogApp from './RepLog/RepLogApp';
 
-const el = <h2>Lift History! <span>❤️</span></h2>;
-
-console.log(el);
-
-ReactDom.render(el, document.getElementById('lift-stuff-app'));
+render(<RepLogApp/>, document.getElementById('lift-stuff-app'));
