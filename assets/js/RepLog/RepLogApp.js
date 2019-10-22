@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
 
 export default class RepLogApp extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            highlightedRowId: null
+        };
+    }
+
     render() {
+        const {highlightedRowId} = this.state;
+        const {withHeart} = this.props;
+
         let heart = '';
 
-        if (this.props.withHeart) {
+        if (withHeart) {
             heart = <span>❤️</span>;
         }
 
@@ -31,7 +42,9 @@ export default class RepLogApp extends Component {
                     {
                         repLogs.map(repLog =>
                             (
-                                <tr key={repLog.id}>
+                                <tr key={repLog.id}
+                                    className={highlightedRowId === repLog.id ? 'info' : ''}
+                                >
                                     <td>{repLog.itemLabel}</td>
                                     <td>{repLog.reps}</td>
                                     <td>{repLog.totalWeightLifted}</td>
