@@ -6,7 +6,13 @@ import RepLogCreator from './RepLogCreator';
 const calculateTotalWeightFancier = repLogs => repLogs.reduce((total, log) => total + log.totalWeightLifted, 0);
 
 export default function RepLogs(props) {
-    const {withHeart, highlightedRowId, onRowClick,repLogs,onNewItemSubmit} = props;
+    const {
+        withHeart,
+        highlightedRowId,
+        onRowClick,
+        repLogs,
+        onAddRepLog
+    } = props;
 
     let heart = '';
 
@@ -43,7 +49,7 @@ export default function RepLogs(props) {
             </table>
 
             <RepLogCreator
-                onNewItemSubmit={onNewItemSubmit}
+                onAddRepLog={onAddRepLog}
             />
         </div>
     );
@@ -53,6 +59,6 @@ RepLogs.propTypes = {
     withHeart: PropTypes.bool,
     highlightedRowId: PropTypes.any,
     onRowClick: PropTypes.func.isRequired,
-    onNewItemSubmit: PropTypes.func.isRequired,
+    onAddRepLog: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired
 };
