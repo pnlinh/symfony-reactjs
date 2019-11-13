@@ -6,10 +6,11 @@ export default class RepLogCreatorControlledComponents extends Component {
         super(props);
 
         this.state = {
-            selectedItemId: '',
-            quantityValue: '',
             quantityInputError: '',
         };
+
+        this.quantityInput = React.createRef();
+        this.itemSelect = React.createRef();
 
         this.itemOptions = [
             {id: 'cat', text: 'Cat'},
@@ -26,13 +27,11 @@ export default class RepLogCreatorControlledComponents extends Component {
     handleFormSubmit(event) {
         event.preventDefault();
         const {onAddRepLog} = this.props;
-        const {selectedItemId,quantityValue} = this.state;
 
-        const itemLabel = this.itemOptions.find((option) => {
-            return option.id === selectedItemId;
-        }).text;
+        const quantityInput = this.quantityInput.current;
+        const itemSelect = this.itemSelect.current;
 
-        if (quantityValue <= 0) {
+        if (quantityInput.value <= 0) {
             this.setState({
                 quantityInputError: 'Please enter a value greater than 0'
             });
@@ -41,13 +40,14 @@ export default class RepLogCreatorControlledComponents extends Component {
         }
 
         onAddRepLog(
-            itemLabel,
-            quantityValue
+            itemSelect.options[itemSelect.selectedIndex].value,
+            quantityInput.value
         );
 
+        quantityInput.value = '';
+        itemSelect.selectedIndex = 0;
+
         this.setState({
-            selectedItemId: 0,
-            quantityValue: '',
             quantityInputError: ''
         });
     }
@@ -75,7 +75,7 @@ export default class RepLogCreatorControlledComponents extends Component {
                     </label>
 
                     <select id="rep_log_item"
-                            value={selectedItemId}
+                            ref={this.itemSelect}
                             onChange={this.handleSelectedItemChange}
                             required="required"
                             className="form-control">
@@ -91,7 +91,7 @@ export default class RepLogCreatorControlledComponents extends Component {
                     </label>
 
                     <input type="number" id="rep_log_reps"
-                           value={quantityValue}
+                           ref={this.quantityInput}
                            onChange={this.handleQuantityInputChange}
                            placeholder="How many times?"
                            className="form-control"/>
