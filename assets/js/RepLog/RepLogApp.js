@@ -11,6 +11,7 @@ export default class RepLogApp extends Component {
             highlightedRowId: null,
             repLogs: [],
             numberOfHearts: 1,
+            isLoaded: false
         };
 
         this.handleRowClick = this.handleRowClick.bind(this);
@@ -23,7 +24,8 @@ export default class RepLogApp extends Component {
         getRepLogs()
             .then(data => {
                 this.setState({
-                    repLogs: data
+                    repLogs: data,
+                    isLoaded: true
                 });
             });
     }
