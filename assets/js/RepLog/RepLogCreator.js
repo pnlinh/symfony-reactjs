@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 
-export default class RepLogCreatorControlledComponents extends Component {
+export default class RepLogCreator extends Component {
     constructor(props) {
         super(props);
 
@@ -103,6 +103,6 @@ export default class RepLogCreatorControlledComponents extends Component {
             </form>);
     }
 }
-RepLogCreatorControlledComponents.propTypes = {
+RepLogCreator.propTypes = {
     onAddRepLog: PropTypes.func.isRequired
 };
