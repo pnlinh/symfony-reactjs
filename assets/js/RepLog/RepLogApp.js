@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import RepLogs from './RepLogs';
 import {getRepLogs, deleteRepLog, createRepLog} from '../api/rep_log_api';
 
@@ -13,7 +14,7 @@ export default class RepLogApp extends Component {
             isLoaded: false,
             isSavingNewRepLog: false,
             successMessage: '',
-            newRepLogValidationErrorMessage: ''
+            newRepLogValidationErrorMessage: '',
         };
 
         this.successMessageTimeoutHandle = 0;
@@ -144,3 +145,12 @@ export default class RepLogApp extends Component {
         )
     }
 }
+
+RepLogApp.propTypes = {
+    withHeart: PropTypes.bool,
+    itemOptions: PropTypes.array,
+};
+
+RepLogApp.defaultProps = {
+    itemOptions: [],
+};
