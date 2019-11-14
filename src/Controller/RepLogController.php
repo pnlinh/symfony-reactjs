@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Api\ApiRoute;
 use App\Entity\RepLog;
 use App\Form\Type\RepLogType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @IsGranted("ROLE_USER")
+ * @ApiRoute()
  */
 class RepLogController extends BaseController
 {
