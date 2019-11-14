@@ -2,8 +2,10 @@ function fetchJson(url, options) {
     return fetch(url, Object.assign({
         credentials: 'same-origin'
     }, options))
-        .then(res => res.json())
-        .catch(err => console.log(err));
+        .then(res => {
+            return res.text()
+                .then(text => text ? JSON.parse(text) : '');
+        });
 }
 
 /**

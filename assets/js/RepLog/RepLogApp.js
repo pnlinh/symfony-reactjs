@@ -74,13 +74,28 @@ export default class RepLogApp extends Component {
     }
 
     handleDeleteRepLog(id) {
-        deleteRepLog(id);
-
-        this.setState((prevState) => {
+        this.setState(prevState => {
             return {
-                repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
-            };
+                repLogs: prevState.repLogs.map(repLog => {
+                    if (repLog.id !== id) {
+                        return repLog;
+                    }
+
+                    return Object.assign({}, repLog, {isDeleting: true});
+                })
+            }
         });
+
+        deleteRepLog(id)
+            .then(() => {
+                this.setState((prevState) => {
+                    return {
+                        repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
+                    };
+                });
+
+                this.setSuccessMessage('Item was removed');
+            });
     }
 
     setSuccessMessage(message) {
